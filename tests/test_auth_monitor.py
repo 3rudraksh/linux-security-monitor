@@ -1,4 +1,4 @@
-from src.collectors.auth_monitor import get_new_auth_events, parse_auth_event
+from src.collectors.auth_monitor import get_new_auth_events, parse_auth_event, parse_auth_events
 
 
 def test_parse_auth_event_ignores_malformed_line():
@@ -16,7 +16,8 @@ def test_parse_auth_event_detects_successful_password():
     event = parse_auth_event(line)
 
     assert event["event_type"] == "authentication_success"
-
+def test_parse_auth_events_returns_empty_list_for_empty_input():
+    assert parse_auth_events([]) == []
 
 
 def test_parse_auth_event_detects_failed_password():
